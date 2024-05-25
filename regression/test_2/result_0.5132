@@ -1,0 +1,15 @@
+0.5132
+
+1 - Model selection to prediction spot price 
+2 - fill the column in X_train
+3 - fill the column in X_test
+4 - model selection on X_train to predict delta
+5 - fill the delta 
+6 - Submit 
+
+Note : didn't used best delta model :/
+       error wrong model used 
+
+0.5246
+Note : didn't used best delta model :/
+       
