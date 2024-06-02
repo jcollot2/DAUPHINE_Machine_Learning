@@ -1,8 +1,0 @@
-1 - Model selection to prediction spot price 
-2 - fill the column in X_train
-3 - model selection on X_train to predict delta
-4 - fill the delta 
-5 - Submit 
-
-Note : forgot to fill X_test :/
-       didn't used best delta model :/
