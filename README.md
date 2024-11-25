@@ -11,6 +11,12 @@ Le but est de développer un modèle de machine learning supervisé capable de p
 - Le **marché Intraday** : marché européen boursier permettant d'acheter de l'électricité le jour même.
 Il est possible de travailler en regression en modélisant l'écart exact entre les deux prix ou par classification en identifiant si le prix Intraday sera supérieur ou inférieur au prix SPOT.
 
+La performance sera mesurée par la **Weighted Accuracy** :
+- **Weighted Accuracy** = Proportion des prédictions correctes sur le sens (positif/négatif) de l'écart, pondérée par la valeur absolue des écarts observés.
+- Plus l'écart est important, plus il est crucial de prédire correctement son sens.
+
+Un benchmark simple consiste à prédire que les prix sur le marché Intraday sont **toujours supérieurs** aux prix du marché SPOT. Historiquement, cette hypothèse est valable dans la majorité des cas.
+
 
 
 ## 📂 **Structure des Données**
@@ -29,22 +35,6 @@ Il est possible de travailler en regression en modélisant l'écart exact entre 
 - `spot_id_delta` : Écart entre le VWAP des transactions sur le marché Intraday et le prix SPOT. 
   - **Positive** : Prix Intraday supérieur au prix SPOT.
   - **Négative** : Prix Intraday inférieur au prix SPOT.
-
----
-
-## 📈 **Évaluation des Modèles**
-
-La performance sera mesurée par la **Weighted Accuracy** :
-- **Weighted Accuracy** = Proportion des prédictions correctes sur le sens (positif/négatif) de l'écart, pondérée par la valeur absolue des écarts observés.
-- Plus l'écart est important, plus il est crucial de prédire correctement son sens.
-
----
-
-## 🛠️ **Benchmark**
-
-Un benchmark simple consiste à prédire que les prix sur le marché Intraday sont **toujours supérieurs** aux prix du marché SPOT. Historiquement, cette hypothèse est valable dans la majorité des cas.
-
----
 
 ## 📦 **Fichiers**
 
