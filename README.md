@@ -1,6 +1,6 @@
 # Prédiction de prix de l'électricité
 
-**Auteurs :** Arthur Frachon - Jeanne Collot  
+**Auteurs :** Arthur Frachon - Jeanne Collot 
 **Cadre :** Dauphine - cours de Machine Learning
 **Date :** 2024
 **Challenge Data :** [Enoncé](https://challengedata.ens.fr/challenges/140)  
