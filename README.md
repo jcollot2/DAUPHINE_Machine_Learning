@@ -41,7 +41,7 @@ Prédire si `spot_id_delta` est positif ou négatif via des modèles de classifi
 #### 2) Normalisation
 - Normalisation des features numériques avec `StandardScaler`.
 
-### 3) Analyse
+#### 3) Analyse
 - Matrices de corrélation montrant une forte dépendance entre `spot_id_delta` et `predicted_spot_price`.
 
 ---
