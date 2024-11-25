@@ -24,7 +24,7 @@
 
 ---
 
-## 3) Problématique
+## ❓Problématique
 
 Prédire si `spot_id_delta` est positif ou négatif via des modèles de classification.
 
@@ -74,7 +74,7 @@ Prédire si `spot_id_delta` est positif ou négatif via des modèles de classifi
 
 ---
 
-## 7) Conclusion
+## 🎯Conclusion
 
 - Les modèles supervisés (notamment Random Forest) surpassent les approches non supervisées et Deep Learning.
 - L'ajout de features via clustering améliore la précision.
