@@ -1,4 +1,4 @@
-# Prévision du prix des Marchés Électriques
+# Prédiction de prix de l'électricité
 
 **Auteurs :** Arthur Frachon - Jeanne Collot  
 **Challenge Data :** [Enoncé](https://challengedata.ens.fr/challenges/140)  
