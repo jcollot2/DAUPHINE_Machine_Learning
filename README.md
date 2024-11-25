@@ -1,21 +1,17 @@
 # Prédiction de Prix de l'Électricité – Challenge Data
 
+
 Nous avons participer au challenge data **Prédiction de prix de l'électricité** organisé par **Elmy**. Ce projet vise à modéliser l'écart de prix entre deux marchés de l'électricité : le marché SPOT et le marché Intraday.
 
----
+
 
 ## 🎯 **Objectif du Projet**
 Le but est de développer un modèle de machine learning supervisé capable de prédire le sens de l'écart de prix entre :
 - Le **marché SPOT** : marché européen d'enchères permettant d'acheter de l'électricité la veille pour le lendemain.
 - Le **marché Intraday** : marché européen boursier permettant d'acheter de l'électricité le jour même.
+Il est possible de travailler en regression en modélisant l'écart exact entre les deux prix ou par classification en identifiant si le prix Intraday sera supérieur ou inférieur au prix SPOT.
 
-### Approches possibles :
-1. **Régression** : Modéliser l'écart exact entre les deux prix.
-2. **Classification** : Identifier si le prix Intraday sera supérieur ou inférieur au prix SPOT.
 
-L'objectif principal est de prédire correctement le **sens de cet écart**.
-
----
 
 ## 📂 **Structure des Données**
 
