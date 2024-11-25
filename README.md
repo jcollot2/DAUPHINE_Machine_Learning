@@ -34,11 +34,11 @@ Prédire si `spot_id_delta` est positif ou négatif via des modèles de classifi
 
 ## 🛠️ Préparation et Exploration des Données
 
-### 1) Nettoyage
+#### 1) Nettoyage
 - Gestion des valeurs manquantes via imputation ou suppression.
 - Ajout de nouvelles features basées sur des décalages temporels (par exemple, prix SPOT à l'heure précédente).
 
-### 2) Normalisation
+#### 2) Normalisation
 - Normalisation des features numériques avec `StandardScaler`.
 
 ### 3) Analyse
@@ -48,17 +48,17 @@ Prédire si `spot_id_delta` est positif ou négatif via des modèles de classifi
 
 ## 📉 Méthodes Explorées
 
-### 1) Benchmark
+#### 1) Benchmark
 - Une régression logistique simple est utilisée comme référence, avec une Weighted Accuracy de **0.643**.
 
-### 2) Modèles Non Supervisés
+#### 2) Modèles Non Supervisés
 - **ACP :** Réduction dimensionnelle pour visualisation et analyse.  
 - **KMeans :** Clustering avec ajout de features basées sur les moyennes des clusters. Weighted Accuracy : **0.739**.
 
-### 3) Modèles Supervisés
+#### 3) Modèles Supervisés
 - **Random Forest Classifier :** Modèle de classification atteignant une Weighted Accuracy de **0.814** après optimisation.
 
-### 4) Deep Learning
+#### 4) Deep Learning
 - **Réseaux de Neurones Standards :** Performances modérées (~0.643 Weighted Accuracy).  
 - **LSTM :** Utilisation pour capter les relations temporelles, mais résultats encore limités (0.421).
 
