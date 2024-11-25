@@ -1,63 +1,81 @@
-# Prédiction de Prix de l'Électricité – Challenge Data
+# Prévision du prix des Marchés Électriques
+
+**Auteurs :** Arthur Frachon - Jeanne Collot  
+**Challenge Data :** [Enoncé](https://challengedata.ens.fr/challenges/140)  
 
 
-Nous avons participer au challenge data **Prédiction de prix de l'électricité** organisé par **Elmy**. Ce projet vise à modéliser l'écart de prix entre deux marchés de l'électricité : le marché SPOT et le marché Intraday.
+## 1) Sujet
 
+**Contexte :** Elmy, producteur et fournisseur d'électricité, souhaite prévoir si les prix de l'électricité sur le marché Intraday seront supérieurs ou inférieurs à ceux du marché SPOT. L'objectif est de modéliser l'écart de prix (spot_id_delta) en utilisant une classification supervisée.
 
-
-## 🎯 **Objectif du Projet**
-Le but est de développer un modèle de machine learning supervisé capable de prédire le sens de l'écart de prix entre :
-- Le **marché SPOT** : marché européen d'enchères permettant d'acheter de l'électricité la veille pour le lendemain.
-- Le **marché Intraday** : marché européen boursier permettant d'acheter de l'électricité le jour même.
-Il est possible de travailler en regression en modélisant l'écart exact entre les deux prix ou par classification en identifiant si le prix Intraday sera supérieur ou inférieur au prix SPOT.
-
-La performance sera mesurée par la **Weighted Accuracy** :
-- **Weighted Accuracy** = Proportion des prédictions correctes sur le sens (positif/négatif) de l'écart, pondérée par la valeur absolue des écarts observés.
-- Plus l'écart est important, plus il est crucial de prédire correctement son sens.
-
-Un benchmark simple consiste à prédire que les prix sur le marché Intraday sont **toujours supérieurs** aux prix du marché SPOT. Historiquement, cette hypothèse est valable dans la majorité des cas.
-
-
-
-## 📂 **Structure des Données**
-
-### Index :
-- `DELIVERY_START` : Date et heure de livraison de l'électricité.
-
-### Variables explicatives :
-- `load_forecast` : Prévision de consommation totale d'électricité en France.
-- `coal_power_available`, `gas_power_available`, `nuclear_power_available` : Capacité totale de production d'électricité des centrales à charbon, gaz et nucléaire.
-- `wind_power_forecasts_average`, `solar_power_forecasts_average` : Moyenne des prévisions de production d'électricité éolienne et solaire.
-- `wind_power_forecasts_std`, `solar_power_forecasts_std` : Écart-type de ces prévisions.
-- `predicted_spot_price` : Prévision du prix SPOT issue d’un modèle interne.
-
-### Variable cible :
-- `spot_id_delta` : Écart entre le VWAP des transactions sur le marché Intraday et le prix SPOT. 
-  - **Positive** : Prix Intraday supérieur au prix SPOT.
-  - **Négative** : Prix Intraday inférieur au prix SPOT.
-
-## 📦 **Fichiers**
-
-1. **Données d'entraînement :**
-   - `x_train.csv` : Variables explicatives pour l’entraînement.
-   - `y_train.csv` : Variable cible pour l’entraînement.
-
-2. **Données de test :**
-   - `x_test.csv` : Variables explicatives pour le test.
-
-3. **Exemple de soumission :**
-   - `example_submission.csv` : Exemple de soumission aléatoire.
+**Métrique :** Weighted Accuracy (pondération par la magnitude des écarts observés).
 
 ---
 
-## 🚀 **Contributions**
+## 2) Données
 
-Vous êtes invités à contribuer à ce projet en :
-- Explorant de nouvelles approches de modélisation (régressions, classifications, algorithmes avancés).
-- Partageant des idées ou des insights dans les issues de ce dépôt.
-  
+- **Index :** `DELIVERY_START` (date et heure de livraison).  
+- **Features principales :**
+  - Prévisions de charge (`load_forecast`), capacité des centrales (charbon, gaz, nucléaire).  
+  - Moyennes et écarts-types des prévisions d'énergie renouvelable (solaire, éolien).  
+  - Prix SPOT prédit (`predicted_spot_price`).
+
+- **Cible :** `spot_id_delta` = Intraday - SPOT.
+
 ---
 
-## 🤝 **Remerciements**
+## 3) Problématique
 
-Merci à **Elmy** et à **Challenge Data** pour l'organisation de ce projet. Ce challenge est une opportunité exceptionnelle de travailler sur des données réelles et d’apporter des solutions concrètes à des problématiques industrielles.
+Prédire si `spot_id_delta` est positif ou négatif via des modèles de classification.
+
+---
+
+## 4) Préparation et Exploration des Données
+
+### 4.1) Nettoyage
+- Gestion des valeurs manquantes via imputation ou suppression.
+- Ajout de nouvelles features basées sur des décalages temporels (par exemple, prix SPOT à l'heure précédente).
+
+### 4.2) Normalisation
+- Normalisation des features numériques avec `StandardScaler`.
+
+### 4.3) Analyse
+- Matrices de corrélation montrant une forte dépendance entre `spot_id_delta` et `predicted_spot_price`.
+
+---
+
+## 5) Méthodes Explorées
+
+### 5.1) Benchmark
+- Une régression logistique simple est utilisée comme référence, avec une Weighted Accuracy de **0.643**.
+
+### 5.2) Modèles Non Supervisés
+- **ACP :** Réduction dimensionnelle pour visualisation et analyse.  
+- **KMeans :** Clustering avec ajout de features basées sur les moyennes des clusters. Weighted Accuracy : **0.739**.
+
+### 5.3) Modèles Supervisés
+- **Random Forest Classifier :** Modèle de classification atteignant une Weighted Accuracy de **0.814** après optimisation.
+
+### 5.4) Deep Learning
+- **Réseaux de Neurones Standards :** Performances modérées (~0.643 Weighted Accuracy).  
+- **LSTM :** Utilisation pour capter les relations temporelles, mais résultats encore limités (0.421).
+
+---
+
+## 6) Résultats
+
+| Modèle                   | Méthode         | Weighted Accuracy |
+|--------------------------|-----------------|--------------------|
+| Logistic Regression      | Baseline        | 0.643             |
+| KMeans                   | Mean Clusters   | 0.739             |
+| Random Forest Classifier | Clusters        | **0.814**         |
+| Random Forest Regressor  | Standard        | **0.874**         |
+| LSTM                     | Standard        | 0.421             |
+
+---
+
+## 7) Conclusion
+
+- Les modèles supervisés (notamment Random Forest) surpassent les approches non supervisées et Deep Learning.
+- L'ajout de features via clustering améliore la précision.
+- Les données nécessitent davantage de signaux explicatifs pour exploiter pleinement le potentiel des méthodes avancées.
